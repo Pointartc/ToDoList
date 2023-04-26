@@ -3,10 +3,8 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { TodosInterface } from '../../shared/interface/interface';
@@ -17,7 +15,7 @@ import { TodosService } from '../../shared/services/todos.service';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit, OnChanges{
+export class TodoListComponent implements OnInit {
 
   @Input('todo') todoProps!: TodosInterface;
   @Input('isEditing') isEditingProps!: boolean
@@ -26,32 +24,23 @@ export class TodoListComponent implements OnInit, OnChanges{
   editingText: string = '';
   @ViewChild('textInput') textInput!: ElementRef;
 
-  constructor(private todoServices: TodosService) {}
+  constructor(private todoServices: TodosService) {
+  }
+
   ngOnInit(): void {
     this.editingText = this.todoProps.text
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // if (changes['isEditingProps'].currentValue) {
-    //   setTimeout(() => {
-    //     this.textInput.nativeElement.focus()
-    //   },0)
-    // }
-  }
-
   setTodoInEditMode(): void {
-    console.log('setTodoInEditMode')
     this.setEditingIdEvent.emit(this.todoProps.id)
   }
 
   removeTodo(): void {
     this.todoServices.removeTodo(this.todoProps.id)
-    console.log('remove')
   }
 
   toggleTodo(): void {
     this.todoServices.toggleTodo(this.todoProps.id)
-    console.log('toggleTodo')
   }
 
   changeText(event: Event) {

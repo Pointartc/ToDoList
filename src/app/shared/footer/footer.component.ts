@@ -37,7 +37,5 @@ export class FooterComponent implements OnInit {
   changeFilter($event: Event, filterName: FilterEnum): void {
     $event.preventDefault()
     this.todosService.changFilter(filterName)
-    console.log('FilterEnum', filterName)
-
   }
 }

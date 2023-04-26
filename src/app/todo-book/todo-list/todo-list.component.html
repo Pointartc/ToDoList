@@ -1,6 +1,3 @@
-<!--<li>{{todoProps.text}}</li>-->
-<!--<span>{{todoProps.isCompleted}}</span>-->
-
 <li [ngClass]="{editing: isEditingProps}">
   <div class="view">
     <input class="toggle" type="checkbox" [checked]="todoProps.isCompleted" (change)="toggleTodo()">
